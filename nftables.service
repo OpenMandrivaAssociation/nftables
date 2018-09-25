@@ -8,9 +8,9 @@ Before=network-pre.target
 Type=oneshot
 ProtectSystem=full
 ProtectHome=true
-ExecStart=/sbin/nft -f /etc/sysconfig/nftables.conf
-ExecReload=/sbin/nft 'flush ruleset; include "/etc/sysconfig/nftables.conf";'
-ExecStop=/sbin/nft flush ruleset
+ExecStart=/usr/sbin/nft -f /etc/sysconfig/nftables.conf
+ExecReload=/usr/sbin/nft 'flush ruleset; include "/etc/sysconfig/nftables.conf";'
+ExecStop=/usr/sbin/nft flush ruleset
 RemainAfterExit=yes
 
 [Install]
