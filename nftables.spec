@@ -46,6 +46,13 @@ Provides:	%{name}-devel = %{EVRD}
 Header files for development with %{name}.
 
 #------------------------------------------------
+%package -n	python-%{name}
+Summary:	Python bindings for %{name}
+Group:		Development/Python
+Requires:	%{libname} = %{EVRD}
+
+%description -n python-%{name}
+Header files for development with %{name}.
 
 %prep
 %autosetup -p1
@@ -85,6 +92,10 @@ EOF
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
+
+%files -n python-%{name}
+%{python_sitelib}/%{name}-*-py%{py_ver}.egg-info
+%{python_sitelib}/%{name}
 
 %files -n %{develname}
 %doc COPYING
