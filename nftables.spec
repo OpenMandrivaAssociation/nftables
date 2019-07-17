@@ -1,11 +1,11 @@
-%define major 0
+%define major 1
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	0.9.0
-Release:	5
+Version:	0.9.1
+Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -16,6 +16,7 @@ BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
 BuildRequires:	gmp-devel
+BuildRequires:	a2x
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(libmnl)
 BuildRequires:	pkgconfig(libnftnl)
@@ -78,7 +79,9 @@ EOF
 %{_presetdir}/86-nftables.preset
 %{_unitdir}/nftables.service
 %{_sbindir}/nft
-%{_mandir}/man8/nft*
+%{_mandir}/man8/*nft*
+%{_mandir}/man3/*nft*
+%{_mandir}/man5/*nft*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
