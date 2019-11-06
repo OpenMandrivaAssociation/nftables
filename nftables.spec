@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	0.9.2
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -17,9 +17,11 @@ BuildRequires:	docbook2x
 BuildRequires:	flex
 BuildRequires:	gmp-devel
 BuildRequires:	a2x
-BuildRequires:	readline-devel
+BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(libmnl)
 BuildRequires:	pkgconfig(libnftnl)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(jansson)
 BuildRequires:	systemd-macros
 
 %description
@@ -46,19 +48,24 @@ Provides:	%{name}-devel = %{EVRD}
 Header files for development with %{name}.
 
 #------------------------------------------------
-%package -n	python-%{name}
+%package -n python-%{name}
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{EVRD}
 
 %description -n python-%{name}
-Header files for development with %{name}.
+Python files for development with %{name}.
 
 %prep
 %autosetup -p1
 
 %build
-%configure
+%configure \
+	--with-xtables \
+	--with-json \
+	--enable-python \
+	--with-python-bin=%{_python}
+
 %make_build
 
 %install
@@ -74,6 +81,11 @@ mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
 cp -a %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/
 
 mkdir -p %{buildroot}%{_sysconfdir}/nftables
+
+# make nftables.py use the real library file name
+# to avoid nftables-devel package dependency
+sofile=$(readlink %{buildroot}%{_libdir}/libnftables.so)
+sed -i -e 's/\(sofile=\)".*"/\1"'$sofile'"/' %{buildroot}%{python_sitelib}/nftables/nftables.py
 
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-nftables.preset << EOF
