@@ -17,6 +17,7 @@ BuildRequires:	docbook2x
 BuildRequires:	flex
 BuildRequires:	gmp-devel
 BuildRequires:	a2x
+BuildRequires:	pkgconfig(xtables)
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(libmnl)
 BuildRequires:	pkgconfig(libnftnl)
