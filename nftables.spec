@@ -65,7 +65,7 @@ Python files for development with %{name}.
 	--with-xtables \
 	--with-json \
 	--enable-python \
-	--with-python-bin=%{_python}
+	--with-python-bin=%{__python3}
 
 %make_build
 
