@@ -4,7 +4,7 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	0.9.5
+Version:	0.9.6
 Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
