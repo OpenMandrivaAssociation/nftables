@@ -4,7 +4,7 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	0.9.6
+Version:	0.9.7
 Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
@@ -12,10 +12,12 @@ URL:		http://netfilter.org/projects/nftables/
 Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.bz2
 Source1:	nftables.service
 Source2:	nftables.conf
+# (tpg) https://bugzilla.redhat.com/show_bug.cgi?id=1834853
+Patch0:		nftables-fix_json_events.patch
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
-BuildRequires:	gmp-devel
+BuildRequires:	pkgconfig(gmp)
 BuildRequires:	a2x
 BuildRequires:	pkgconfig(xtables)
 BuildRequires:	pkgconfig(readline)
@@ -92,6 +94,15 @@ install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-nftables.preset << EOF
 enable nftables.service
 EOF
+
+%post
+%systemd_post nftables.service
+
+%preun
+%systemd_preun nftables.service
+
+%postun
+%systemd_postun_with_restart nftables.service
 
 %files
 %config(noreplace) %{_sysconfdir}/nftables/
