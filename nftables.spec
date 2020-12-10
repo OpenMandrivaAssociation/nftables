@@ -12,8 +12,6 @@ URL:		http://netfilter.org/projects/nftables/
 Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.bz2
 Source1:	nftables.service
 Source2:	nftables.conf
-# (tpg) https://bugzilla.redhat.com/show_bug.cgi?id=1834853
-Patch0:		nftables-fix_json_events.patch
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
