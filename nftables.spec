@@ -4,7 +4,7 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	0.9.8
+Version:	0.9.9
 Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
@@ -23,7 +23,7 @@ BuildRequires:	pkgconfig(libmnl)
 BuildRequires:	pkgconfig(libnftnl)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(jansson)
-BuildRequires:	systemd-macros
+BuildRequires:	systemd-rpm-macros
 
 %description
 Netfilter Tables userspace utilities.
@@ -105,9 +105,11 @@ EOF
 %files
 %config(noreplace) %{_sysconfdir}/nftables/
 %config(noreplace) %{_sysconfdir}/sysconfig/nftables.conf
+%dir %{_datadir}/%{name}
 %{_presetdir}/86-nftables.preset
 %{_unitdir}/nftables.service
 %{_sbindir}/nft
+%{_datadir}/%{name}/*.nft
 %{_mandir}/man8/*nft*
 %{_mandir}/man3/*nft*
 %{_mandir}/man5/*nft*
