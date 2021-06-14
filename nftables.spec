@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	0.9.9
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -80,8 +80,12 @@ cp -a %{SOURCE1} %{buildroot}%{_unitdir}/
 
 mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
 cp -a %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/
+chmod 600 %{buildroot}%{_sysconfdir}/sysconfig/nftables.conf
 
-mkdir -p %{buildroot}%{_sysconfdir}/nftables
+mkdir -m 700 -p %{buildroot}%{_sysconfdir}/nftables
+mv %{buildroot}%{_datadir}/nftables/*.nft %{buildroot}%{_sysconfdir}/nftables/
+chmod 600 %{buildroot}%{_sysconfdir}/nftables/*.nft
+chmod 700 %{buildroot}%{_sysconfdir}/nftables
 
 # make nftables.py use the real library file name
 # to avoid nftables-devel package dependency
@@ -109,7 +113,6 @@ EOF
 %{_presetdir}/86-nftables.preset
 %{_unitdir}/nftables.service
 %{_sbindir}/nft
-%{_datadir}/%{name}/*.nft
 %{_mandir}/man8/*nft*
 %{_mandir}/man3/*nft*
 %{_mandir}/man5/*nft*
