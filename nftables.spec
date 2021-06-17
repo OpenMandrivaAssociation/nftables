@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	0.9.9
-Release:	2
+Release:	3
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -52,7 +52,8 @@ Header files for development with %{name}.
 %package -n python-%{name}
 Summary:	Python bindings for %{name}
 Group:		Development/Python
-Requires:	%{libname} = %{EVRD}
+BuildArch:	noarch
+Requires:	%{name} >= %{EVRD}
 
 %description -n python-%{name}
 Python files for development with %{name}.
@@ -68,6 +69,9 @@ Python files for development with %{name}.
 	--with-python-bin=%{__python3}
 
 %make_build
+
+%check
+make check
 
 %install
 %make_install
