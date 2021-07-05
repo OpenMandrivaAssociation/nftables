@@ -1,12 +1,11 @@
 %define major 1
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
-%define _disable_lto 1
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	0.9.9
-Release:	3
+Release:	4
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
