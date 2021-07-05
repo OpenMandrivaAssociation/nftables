@@ -1,6 +1,7 @@
 %define major 1
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
+%define _disable_lto 1
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
@@ -24,6 +25,7 @@ BuildRequires:	pkgconfig(libnftnl)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(jansson)
 BuildRequires:	systemd-rpm-macros
+%systemd_requires
 
 %description
 Netfilter Tables userspace utilities.
@@ -52,7 +54,6 @@ Header files for development with %{name}.
 %package -n python-%{name}
 Summary:	Python bindings for %{name}
 Group:		Development/Python
-BuildArch:	noarch
 Requires:	%{name} >= %{EVRD}
 
 %description -n python-%{name}
