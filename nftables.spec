@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	1.0.1
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -13,6 +13,7 @@ Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.bz2
 Source1:	nftables.service
 Source2:	nftables.conf
 Patch0:		nftables-1.0.1-drop-historyh.patch
+Patch1:		nftables-1.0.1-fix-terse.patch
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
@@ -90,8 +91,10 @@ chmod 600 %{buildroot}%{_sysconfdir}/sysconfig/nftables.conf
 
 mkdir -m 700 -p %{buildroot}%{_sysconfdir}/nftables
 mv %{buildroot}%{_datadir}/nftables/*.nft %{buildroot}%{_sysconfdir}/nftables/
-chmod 600 %{buildroot}%{_sysconfdir}/nftables/*.nft
-chmod 700 %{buildroot}%{_sysconfdir}/nftables
+
+find %{buildroot}%{_sysconfdir} \
+    \( -type d -exec chmod 0700 {} \; \) , \
+    \( -type f -exec chmod 0600 {} \; \)
 
 # make nftables.py use the real library file name
 # to avoid nftables-devel package dependency
@@ -119,9 +122,9 @@ EOF
 %{_presetdir}/86-nftables.preset
 %{_unitdir}/nftables.service
 %{_sbindir}/nft
-%{_mandir}/man8/*nft*
-%{_mandir}/man3/*nft*
-%{_mandir}/man5/*nft*
+%doc %{_mandir}/man8/*nft*
+%doc %{_mandir}/man3/*nft*
+%doc %{_mandir}/man5/*nft*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
