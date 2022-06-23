@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	1.0.1
-Release:	2
+Release:	3
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -121,7 +121,7 @@ EOF
 %dir %{_datadir}/%{name}
 %{_presetdir}/86-nftables.preset
 %{_unitdir}/nftables.service
-%{_sbindir}/nft
+%{_bindir}/nft
 %doc %{_mandir}/man8/*nft*
 %doc %{_mandir}/man3/*nft*
 %doc %{_mandir}/man5/*nft*
