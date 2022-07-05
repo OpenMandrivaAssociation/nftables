@@ -4,16 +4,14 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	1.0.1
-Release:	3
+Version:	1.0.4
+Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
 Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.bz2
 Source1:	nftables.service
 Source2:	nftables.conf
-Patch0:		nftables-1.0.1-drop-historyh.patch
-Patch1:		nftables-1.0.1-fix-terse.patch
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
