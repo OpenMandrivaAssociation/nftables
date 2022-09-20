@@ -5,7 +5,7 @@
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
 Version:	1.0.4
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -25,6 +25,7 @@ BuildRequires:	pkgconfig(libnftnl)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(jansson)
 BuildRequires:	systemd-rpm-macros
+Provides:	/usr/sbin/nft
 %systemd_requires
 
 %description
