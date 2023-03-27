@@ -1,15 +1,17 @@
 %define major 1
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
+# (tpg) optimize it a bit
+%global optflags %{optflags} -Oz
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	1.0.5
+Version:	1.0.7
 Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
-Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.bz2
+Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.xz
 Source1:	nftables.service
 Source2:	nftables.conf
 BuildRequires:	bison
