@@ -78,6 +78,7 @@ Python files for development with %{name}.
 make check
 
 %install
+export SETUPTOOLS_USE_DISTUTILS=stdlib
 %make_install
 
 find %{buildroot} -name '*.la' -delete
@@ -96,11 +97,6 @@ mv %{buildroot}%{_datadir}/nftables/*.nft %{buildroot}%{_sysconfdir}/nftables/
 find %{buildroot}%{_sysconfdir} \
     \( -type d -exec chmod 0700 {} \; \) , \
     \( -type f -exec chmod 0600 {} \; \)
-
-# make nftables.py use the real library file name
-# to avoid nftables-devel package dependency
-sofile=$(readlink %{buildroot}%{_libdir}/libnftables.so)
-sed -i -e 's/\(sofile=\)".*"/\1"'$sofile'"/' %{buildroot}%{python_sitelib}/nftables/nftables.py
 
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-nftables.preset << EOF
