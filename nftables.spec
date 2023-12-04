@@ -6,8 +6,8 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	1.0.7
-Release:	2
+Version:	1.0.9
+Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		http://netfilter.org/projects/nftables/
@@ -68,11 +68,12 @@ Python files for development with %{name}.
 %build
 %configure \
 	--with-xtables \
-	--with-json \
-	--enable-python \
-	--with-python-bin=%{__python3}
+	--with-json
 
 %make_build
+
+cd py/
+%py_build
 
 %check
 make check
@@ -103,6 +104,9 @@ cat > %{buildroot}%{_presetdir}/86-nftables.preset << EOF
 enable nftables.service
 EOF
 
+cd py/
+%py_install
+
 %post
 %systemd_post nftables.service
 
@@ -127,8 +131,7 @@ EOF
 %{_libdir}/lib%{name}.so.%{major}*
 
 %files -n python-%{name}
-%{python_sitelib}/%{name}-*-py%{py_ver}.egg-info
-%{python_sitelib}/%{name}
+%{python_sitelib}/%{name}*
 
 %files -n %{develname}
 %doc COPYING
