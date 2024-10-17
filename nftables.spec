@@ -10,7 +10,7 @@ Version:	1.1.0
 Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
-URL:		http://netfilter.org/projects/nftables/
+URL:		https://netfilter.org/projects/nftables/
 Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.xz
 Source1:	nftables.service
 Source2:	nftables.conf
