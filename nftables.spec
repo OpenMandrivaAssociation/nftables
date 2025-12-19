@@ -17,6 +17,7 @@ Source2:	nftables.conf
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
+BuildRequires:	libtool
 BuildRequires:	pkgconfig(gmp)
 BuildRequires:	a2x
 BuildRequires:	pkgconfig(xtables)
