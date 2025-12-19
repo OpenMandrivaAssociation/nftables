@@ -21,6 +21,7 @@ BuildRequires:	docbook2x
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	pkgconfig(gmp)
 BuildRequires:	a2x
 BuildRequires:	pkgconfig(xtables)
