@@ -14,6 +14,7 @@ URL:		https://netfilter.org/projects/nftables/
 Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.xz
 Source1:	nftables.service
 Source2:	nftables.conf
+BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
