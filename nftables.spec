@@ -6,8 +6,8 @@
 
 Summary:	Netfilter Tables userspace utillites
 Name:		nftables
-Version:	1.1.1
-Release:	2
+Version:	1.1.6
+Release:	1
 License:	GPLv2
 Group:		System/Kernel and hardware
 URL:		https://netfilter.org/projects/nftables/
