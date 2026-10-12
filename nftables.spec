@@ -76,7 +76,24 @@ Python files for development with %{name}.
 %build
 %configure \
 	--with-xtables \
-	--with-json
+	--with-json \
+	--with-stable-release=1
+
+# config.status leaves VERSION empty, so nftversion.h starts with a bare comma.
+python - << 'PY'
+ver = "%{version}".split(".")
+lines = [
+    "static char nftversion[] = {",
+    "\t" + ",".join(ver) + ",",
+    "\t1",
+    "};",
+    "static char nftbuildstamp[] = {",
+]
+for shift in range(56, -1, -8):
+    lines.append(f"\t((uint64_t)MAKE_STAMP >> {shift}) & 0xff,")
+lines.append("};")
+open("nftversion.h", "w").write("\n".join(lines) + "\n")
+PY
 
 %make_build
 
