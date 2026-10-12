@@ -15,14 +15,12 @@ Source0:	http://ftp.netfilter.org/pub/nftables/nftables-%{version}.tar.xz
 Source1:	nftables.service
 Source2:	nftables.conf
 BuildRequires:	autoconf
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook2x
 BuildRequires:	flex
-BuildRequires:	libtool
 BuildRequires:	python%{pyver}dist(pip)
 BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	pkgconfig(gmp)
@@ -101,7 +99,11 @@ cd py/
 %py_build
 
 %check
-make check
+# tests/build reclones the tree with git and runs distcheck. The release
+# tarball has no repository, so that test cannot pass here.
+# tests/shell needs a network namespace through unshare, which the builder
+# refuses. The remaining tests skip themselves when not root.
+make check TESTS="tests/json_echo/run-test.py tests/monitor/run-tests.sh tests/py/nft-test.py"
 
 %install
 export SETUPTOOLS_USE_DISTUTILS=stdlib
@@ -131,15 +133,6 @@ EOF
 
 cd py/
 %py_install
-
-%post
-%systemd_post nftables.service
-
-%preun
-%systemd_preun nftables.service
-
-%postun
-%systemd_postun_with_restart nftables.service
 
 %files
 %config(noreplace) %{_sysconfdir}/nftables/
